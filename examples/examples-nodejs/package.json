@@ -1,7 +1,17 @@
 {
   "author": "justadudewhohacks",
   "license": "MIT",
+  "scripts": {
+    "faceRecognition": "ts-node faceRecognition.ts"
+  },
   "dependencies": {
-    "face-api.js": "../../"
+    "@tensorflow/tfjs": "1.7.4",
+    "@tensorflow/tfjs-core": "1.7.4",
+    "tslib": "^1.11.1",
+    "@tensorflow/tfjs-node": "1.7.4",
+    "face-api.js": "^0.22.2"
+  },
+  "devDependencies": {
+    "ts-node": "^9.0.0"
   }
 }

@@ -2,8 +2,8 @@ import * as faceapi from 'face-api.js';
 
 import { canvas, faceDetectionNet, faceDetectionOptions, saveFile } from './commons';
 
-const REFERENCE_IMAGE = '../images/bbt1.jpg'
-const QUERY_IMAGE = '../images/bbt4.jpg'
+const REFERENCE_IMAGE = '../images/f5.png'
+const QUERY_IMAGE = '../images/f7.png'
 
 async function run() {
 
@@ -32,13 +32,16 @@ async function run() {
   const outRef = faceapi.createCanvasFromMedia(referenceImage)
   refDrawBoxes.forEach(drawBox => drawBox.draw(outRef))
 
+  console.log(labels)
   saveFile('referenceImage.jpg', (outRef as any).toBuffer('image/jpeg'))
 
   const queryDrawBoxes = resultsQuery.map(res => {
     const bestMatch = faceMatcher.findBestMatch(res.descriptor)
+    console.log(bestMatch)
     return new faceapi.draw.DrawBox(res.detection.box, { label: bestMatch.toString() })
   })
   const outQuery = faceapi.createCanvasFromMedia(queryImage)
+  // console.log(outQuery)
   queryDrawBoxes.forEach(drawBox => drawBox.draw(outQuery))
   saveFile('queryImage.jpg', (outQuery as any).toBuffer('image/jpeg'))
   console.log('done, saved results to out/queryImage.jpg')
